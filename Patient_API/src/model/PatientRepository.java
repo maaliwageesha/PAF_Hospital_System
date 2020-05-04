@@ -60,7 +60,8 @@ public class PatientRepository{
 				String city=rs.getString("city");
 				String contact=rs.getString("contact");
 				
-				output += "<tr><td>" + patientID + "</td>";
+				output += "<tr><td><input id='hidItemIDUpdate'name='hidItemIDUpdate' type='hidden'value='" + patientID + "'>" + patientID + "</td>"; 
+				//output += "<tr><td>" + patientID + "</td>";
 				output += "<td>" + NIC + "</td>";
 				output += "<td>" + firstName + "</td>";
 				output += "<td>" + lastName + "</td>";
@@ -148,7 +149,15 @@ public class PatientRepository{
 
 	
 	
-	public String createPatientAsForm(String NIC, String firstName, String lastName, String email , String gender , String address, String password, String city, String contact)
+	public String createPatientAsForm(String NIC, 
+			                          String firstName,
+			                          String lastName,
+			                          String email ,
+			                          String gender ,
+			                          String address,
+			                          String password,
+			                          String city,
+			                          String contact)
 	{
 		String output;
 		int count=0;
@@ -211,15 +220,41 @@ public class PatientRepository{
 	 * @param p1
 	 * @return
 	 */
-	public String UpdatePatient(int patientID,String NIC, String firstName, String lastName, String email , String gender , String address, String password, String city, String contact)
+//Update patients
+	public String UpdatePatient(int patientID,
+			                    String NIC,
+			                    String firstName,
+			                    String lastName,
+			                    String email , 
+			                    String gender , 
+			                    String address,
+			                    String password,
+			                    String city,
+			                    String contact)
 	{
+		String output = "";
 		int count=0;
-		String sql = "update patient set NIC = ? , firstName = ? , lastName = ?,email = ? , gender = ? , address = ?,password = ? , city = ? , contact = ?  where patientID = ?";
+		//String sql = "update patient set NIC = ? , firstName = ? , lastName = ?,email = ? , gender = ? , address = ?,password = ? , city = ? , contact = ?  where patientID = ?";
 		
-		try {
+    try {
+			//Connection con = connect(); 
+			 
+			   if (con == null)  
+			        {   
+				       return "Error while connecting to the database for updating.";  
+				    }
+	          //Create a Prepared statement
+		      String sql = "update patient set NIC = ? , firstName = ? , lastName = ?,email = ? ,"
+		      		       + " gender = ? , address = ?,password = ? , city = ? , contact = ?  where patientID = ?";
+			   
+		      System.out.println(patientID);
+		      System.out.println(NIC);
+		      System.out.println(gender);
+		      System.out.println(contact);
+			
 			PreparedStatement st = con.prepareStatement(sql);
 
-			
+	     	//binding values
 			st.setString(1,NIC);
 			st.setString(2,firstName);
 			st.setString(3,lastName);
@@ -230,19 +265,30 @@ public class PatientRepository{
 			st.setString(8,city);
 			st.setString(9,contact);
 			st.setInt(10,patientID);
+			
 			count=st.executeUpdate();
+			//con.close();		
 			
-		} catch (SQLException e) { 
-			e.printStackTrace();
-		}
+	   } 
+         catch (SQLException e) { 
+        	 
+ 			e.printStackTrace();
+ 			System.out.println("connection value"+e);
+ 		}
+ 		String getPatients = getAllPatients();
+ 		 output = "{\"status\":\"success\", \"data\": \"" +
+ 				 getPatients + "\"}"; 
+ 		
+ 		if(count>0)
+ 		{
+ 			return output;
+ 		}else {
+ 			output = "{\"status\":\"error\", \"data\": \"Error while updating the item.\"}"; 
+ 			return output;
+ 		}
+        	 
+        	 
 		
-		if(count>0)
-		{
-			return "User successfully updated";
-		}else {
-			
-			return "Update unsuccessful";
-		}
 	}
 	
 	
@@ -250,7 +296,7 @@ public class PatientRepository{
 
 	
 	
-	
+//Delete patients
 	public String DeletePatient(String patientID) {
 		String output = "";
 		try {

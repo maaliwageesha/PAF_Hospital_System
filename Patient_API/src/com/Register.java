@@ -22,7 +22,15 @@ public class Register {
 	@POST
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String CreatePatient(@FormParam("NIC") String NIC,@FormParam("firstname") String firstname,@FormParam("lastname") String lastname,@FormParam("email") String email,@FormParam("gender") String gender,@FormParam("address") String address,@FormParam("password") String password,@FormParam("city") String city,@FormParam("contact") String contact)
+	public String CreatePatient(@FormParam("NIC") String NIC,
+			                   @FormParam("firstname") String firstname,
+			                   @FormParam("lastname") String lastname,
+			                   @FormParam("email") String email,
+			                   @FormParam("gender") String gender,
+			                   @FormParam("address") String address,
+			                   @FormParam("password") String password,
+			                   @FormParam("city") String city,
+			                   @FormParam("contact") String contact)
 	{
 		System.out.println(password);
 		if(NIC.length()==0 || email.length()==0 || password.length()==0)
