@@ -220,7 +220,7 @@ public class PatientRepository{
 	 * @param p1
 	 * @return
 	 */
-//Update patients
+    //Update patients
 	public String UpdatePatient(int patientID,
 			                    String NIC,
 			                    String firstName,
@@ -234,88 +234,107 @@ public class PatientRepository{
 	{
 		String output = "";
 		int count=0;
-		//String sql = "update patient set NIC = ? , firstName = ? , lastName = ?,email = ? , gender = ? , address = ?,password = ? , city = ? , contact = ?  where patientID = ?";
-		
-    try {
-			//Connection con = connect(); 
-			 
-			   if (con == null)  
-			        {   
-				       return "Error while connecting to the database for updating.";  
-				    }
-	          //Create a Prepared statement
-		      String sql = "update patient set NIC = ? , firstName = ? , lastName = ?,email = ? ,"
-		      		       + " gender = ? , address = ?,password = ? , city = ? , contact = ?  where patientID = ?";
+	  try {
+		    if (con == null)  
+			 {   
+			   return "Error while connecting to the database for updating.";  
+			 }
+	     //Create a Prepared statement
+		 String sql = "update patient set NIC = ? , firstName = ? , lastName = ?,email = ? ,"
+		      		  + " gender = ? , address = ?,password = ? , city = ? , contact = ?  where patientID = ?";
 			   
-		      System.out.println(patientID);
-		      System.out.println(NIC);
-		      System.out.println(gender);
-		      System.out.println(contact);
-			
-			PreparedStatement st = con.prepareStatement(sql);
+		 PreparedStatement st = con.prepareStatement(sql);
 
-	     	//binding values
-			st.setString(1,NIC);
-			st.setString(2,firstName);
-			st.setString(3,lastName);
-			st.setString(4,email);
-			st.setString(5,gender);
-			st.setString(6,address);
-			st.setString(7,password);
-			st.setString(8,city);
-			st.setString(9,contact);
-			st.setInt(10,patientID);
+	    //binding values
+		st.setString(1,NIC);
+    	st.setString(2,firstName);
+	    st.setString(3,lastName);
+	    st.setString(4,email);
+	    st.setString(5,gender);
+		st.setString(6,address);
+		st.setString(7,password);
+		st.setString(8,city);
+		st.setString(9,contact);
+		st.setInt(10,patientID);
 			
-			count=st.executeUpdate();
-			//con.close();		
-			
-	   } 
-         catch (SQLException e) { 
-        	 
- 			e.printStackTrace();
- 			System.out.println("connection value"+e);
- 		}
- 		String getPatients = getAllPatients();
- 		 output = "{\"status\":\"success\", \"data\": \"" +
+		count=st.executeUpdate();
+	} 
+    catch (SQLException e)
+	{ 
+      e.printStackTrace();
+ 	  System.out.println("connection value"+e);
+    }
+ 	  String getPatients = getAllPatients();
+ 	  output = "{\"status\":\"success\", \"data\": \"" +
  				 getPatients + "\"}"; 
- 		
- 		if(count>0)
- 		{
- 			return output;
- 		}else {
- 			output = "{\"status\":\"error\", \"data\": \"Error while updating the item.\"}"; 
- 			return output;
- 		}
-        	 
-        	 
-		
-	}
-	
-	
-	
-
-	
-	
+ 	  if(count>0)
+ 	  {
+ 	    return output;
+ 	  }else
+ 	   {
+ 		 output = "{\"status\":\"error\", \"data\": \"Error while updating the item.\"}"; 
+ 		 return output;
+ 	   }
+	}    	 
+      	 
 //Delete patients
-	public String DeletePatient(String patientID) {
-		String output = "";
-		try {
+//public String DeletePatient(String patientID)
+ //{
+		//String output = "";
+	//	try {
 			
 		
-			String query = "delete from patient where patientID=?";
-			PreparedStatement preparedStmt = con.prepareStatement(query);
-			preparedStmt.setInt(1, Integer.parseInt(patientID)); 
-			preparedStmt.execute();
-			con.close();
-			output = "Deleted successfully";
-		} catch (Exception e) {
-			output = "Error while deleting the patient.";
-			System.err.println(e.getMessage());
-		}
-		return output;
+			//String query = "delete from patient where patientID=?";
+			//PreparedStatement preparedStmt = con.prepareStatement(query);
+			//preparedStmt.setInt(1, Integer.parseInt(patientID)); 
+			//preparedStmt.execute();
+			//con.close();
+			//output = "Deleted successfully";
+		//} catch (Exception e) {
+			//output = "Error while deleting the patient.";
+		//	System.err.println(e.getMessage());
+		//}
+		//return output;
+	 //}
+ //}
+public String DeletePatient(String patientID)
+ {  
+	String output = ""; 
+	 
+	  try 
+	  {   
+		  Connection con = null; 
+	 
+	      if (con == null) 
+	      {  
+	    	 return "Error while connecting to the database for deleting.";
+	      } 
+	  
+	      //create a prepared statement   
+	      String sql = "delete from items where patientID=?"; 
+	      PreparedStatement st =con.prepareStatement(sql); 
+	      
+	      //binding values    
+	      st.setInt(1, Integer.parseInt(patientID)); 
+	 
+	      // execute the statement
+	      st.execute(); 
+	      con.close(); 
+	 
+	      String getPatients = getAllPatients(); 
+	      output = "{\"status\":\"success\", \"data\": \""
+	                 +getPatients + "\"}";
+	   } 
+	   catch (Exception e)
+	    {   
+		  output = "{\"status\":\"error\", \"data\":"
+		  		    + "\"Error while deleting the patients.\"}";
+		  System.err.println(e.getMessage());
+		} 
+	 
+	  return output;
 	}
-	
-	
-	
 }
+	
+
 

@@ -112,20 +112,17 @@ public class patientAPI extends HttpServlet {
 		
 				 
 		 
-		 response.getWriter().write(output);
+		  response.getWriter().write(output);
 	}
 
 	/**
 	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
-		//Map paras = getParasMap(request); 
-		 
-		 //String output = patientobj.DeletePatient(paras.get("patientID").toString()); 
-		 
-		 //response.getWriter().write(output); 
+		 Map paras = getParasMap(request);
+		 String output = patient.DeletePatient(paras.get("patientID").toString());
+		 response.getWriter().write(output); 
 	}
 
 }

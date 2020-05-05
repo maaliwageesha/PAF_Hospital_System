@@ -62,15 +62,7 @@ function  onItemSaveComplete(response,status){
 				 $("#alertError").show();
 			}
 }
-/*var student = getStudentCard($("#txtName").val().trim(),
- $('input[name="rdoGender"]:checked').val(),
- $("#ddlYear").val());
- $("#colStudents").append(student);
 
- $("#alertSuccess").text("Saved successfully.");
- $("#alertSuccess").show();
-
- $("#formStudent")[0].reset();*/
 });
 
 
@@ -134,7 +126,7 @@ return "Insert confirm password.";
 return true;
 }
 
-
+//Update operation
 
 $(document).on("click", ".btnUpdate", function(event)
 		{
@@ -154,16 +146,9 @@ $(document).on("click", ".btnUpdate", function(event)
 		
 		});
 
-
-
-
-
-
 $(document).on("click", "#btnSave", function(event)
 		{
-	
-         
-		$.ajax(
+	      $.ajax(
 				{
 					url:"patientAPI",
 					type:"PUT",
@@ -199,3 +184,48 @@ $(document).on("click", "#btnSave", function(event)
 		}
 		
 		});
+//Delete Operation
+
+$(document).on("click", ".btnRemove", function(event)
+		{  
+	      $.ajax (
+	    	{   
+	    	  url : "patientAPI",
+	    	  type : "DELETE", 
+	    	  data : "patientID=" + $(this).data("patientID"),
+	    	  dataType : "text", 
+	    	  complete : function(response, status) 
+	    	   {   
+	    		  onItemDeleteComplete(response.responseText, status); 
+	    	   } 
+	    }); 
+ }); 
+function onItemDeleteComplete(response, status)
+ {
+	 if (status == "success") 
+	 {  
+		 var resultSet = JSON.parse(response); 
+
+         if (resultSet.status.trim() == "success") 
+         {   
+        	$("#alertSuccess").text("Successfully deleted.");
+        	$("#alertSuccess").show(); 
+
+            $("#divItemsGrid").html(resultSet.data);
+         } else if (resultSet.status.trim() == "error")
+            {   
+        	   $("#alertError").text(resultSet.data);  
+        	   $("#alertError").show(); 
+        	} 
+
+    } else if (status == "error")
+        {  
+    	    $("#alertError").text("Error while deleting.");
+    	    $("#alertError").show();
+    	}
+        else
+         {   $("#alertError").text("Unknown error while deleting..");
+             $("#alertError").show(); 
+         } 
+  } 
+
