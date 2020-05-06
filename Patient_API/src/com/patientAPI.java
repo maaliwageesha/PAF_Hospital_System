@@ -42,6 +42,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+//Use DoPost method for insert operation....
 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String output = patient.createPatientAsForm(request.getParameter("Nic"),
@@ -56,7 +57,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 				
 		response.getWriter().write(output); 
 	}
-// Convert request parameters to a Map
+// Convert Request parameters to Map...
 private static Map getParasMap(HttpServletRequest request)
 	{  
 		Map<String, String> map = new HashMap<String, String>(); 
@@ -83,6 +84,7 @@ private static Map getParasMap(HttpServletRequest request)
 	/**
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
 	 */
+//Use DoPut method for update operation....
 protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
@@ -114,6 +116,7 @@ protected void doPut(HttpServletRequest request, HttpServletResponse response) t
 	/**
 	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
 	 */
+//Use DoDelete ethod for delete operation....
 protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		 Map paras = getParasMap(request);

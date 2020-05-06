@@ -140,7 +140,8 @@ public String getPatient(String patID) {
 		}
 		return output;
 	}
-	
+
+//For insert patients...	
 public String createPatientAsForm( String NIC, 
 			                       String firstName,
 			                       String lastName,
@@ -211,7 +212,7 @@ public String createPatientAsForm( String NIC,
 	 * @param p1
 	 * @return
 	 */
-//Update patients...
+//For Update patients...
 public String UpdatePatient(String patientID,
 		                    String NIC,
 		                    String firstName,
@@ -246,6 +247,7 @@ public String UpdatePatient(String patientID,
 			preparedStmt.setString(8, city);
 			preparedStmt.setString(9, contact);
 			preparedStmt.setInt(10, Integer.parseInt(patientID));
+			
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
@@ -265,7 +267,7 @@ public String UpdatePatient(String patientID,
 			 
 	} 
 
-//Delete patients...
+//For Delete patients...
 public String DeletePatient(String patientID)
  {  
 	System.out.println("visited delete");

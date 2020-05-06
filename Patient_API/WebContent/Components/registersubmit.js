@@ -8,12 +8,12 @@ $(document).ready(function()
  $("#alertError").hide();
 }); 
 
-//SAVE ============================================
+//Click event of the SAVE Button ============================================
 $(document).on("click", "#submit", function(event)
 		
 {
 	console.log("hello")
-// Clear status msges-------------
+// Clear status messages-------------
  $("#alertSuccess").text("");
  $("#alertSuccess").hide();
  $("#alertError").text("");
@@ -239,11 +239,11 @@ function validateItemFormforUpdate(){
    {
 	 return "Please enter valid email address";
    }
-/*//For Gender
-   if ($('input[name="Gender"]:checked').length === 0)
+//For Gender
+   if ($('input[name="gridRadios"]:checked').length === 0)
    {
      return "Select gender.";
-   }*/
+   }
 //For Address
    if ($("#address").val().trim() == "")
    {
