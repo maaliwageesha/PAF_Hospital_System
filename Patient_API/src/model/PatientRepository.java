@@ -33,7 +33,7 @@ private static Connection connect() {
 public String getAllPatients()
 	{ String output="";
 	  output = "<table border='1'><tr><th>Patient ID</th><th>NIC</th><th>First Name</th><th>Last Name</th>"
-			   + "<th>Email</th><th>Gender</th><th>Address</th><th>Password</th><th>City</th><th>Contact</th><th>update</th><th>remove></th></tr>";
+			   + "<th>Email</th><th>Gender</th><th>Address</th><th>Password</th><th>City</th><th>Contact</th><th>update</th><th>remove</th></tr>";
 		
 	  String sql="select * from patient";
 		

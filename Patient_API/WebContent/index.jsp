@@ -24,10 +24,7 @@
 </head>
 
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
+    
 
     <!-- Header section -->
     <header class="header-section">
@@ -315,7 +312,7 @@
 
 
     <!--====== Javascripts & Jquery ======-->
-    <script defer src="./js/jquery-3.2.1.min.js"></script>
+    <script defer src="./Components/jquery-3.2.1.min.js"></script>
     <script defer src="./js/bootstrap.min.js"></script>
     <script defer src="./js/owl.carousel.min.js"></script>
     <script defer src="./js/circle-progress.min.js"></script>
