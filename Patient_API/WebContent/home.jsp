@@ -64,7 +64,7 @@
    <br> contact:
     <input id="contact" name="contact" type="number"
         class="form-control form-control-sm">
-  <br>
+   <br>
     <input id="btnSave" name="btnSave" type="button"value="Save" class="btn btn-primary">
     <input type="hidden" id="hidpatientIDSave" name="hidpatientIDSave" value="">
 </form>

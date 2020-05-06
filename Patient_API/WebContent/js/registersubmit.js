@@ -8,9 +8,9 @@ $(document).ready(function()
  $("#alertError").hide();
 }); 
 
-
 //SAVE ============================================
 $(document).on("click", "#submit", function(event)
+		
 {
 // Clear status msges-------------
  $("#alertSuccess").text("");
@@ -20,6 +20,7 @@ $(document).on("click", "#submit", function(event)
  
 // Form validation----------------
 var status = validateItemForm();
+
 // If not valid-------------------
 if (status != true)
  {
@@ -27,6 +28,7 @@ if (status != true)
  $("#alertError").show();
  return;
  }
+
 // If valid-----------------------
 $.ajax(
 		{
@@ -130,7 +132,7 @@ return true;
 
 $(document).on("click", ".btnUpdate", function(event)
 		{
-	console.log("function is visited");
+	
            $("#hidpatientIDSave").val($(this).closest("tr").find('#hidItemIDUpdate').val()); 
            $("#Nic").val($(this).closest("tr").find('td:eq(1)').text());  
            $("#firstName").val($(this).closest("tr").find('td:eq(2)').text());
@@ -156,50 +158,88 @@ $(document).on("click", "#btnSave", function(event)
 					dataType:"text",
 					complete:function(response,status)
 					{
-						onItemSaveComplete(response.responseText,status);
+						
+						onItemSaveComplete1(response.responseText,status);
 					}
 				});
-		function  onItemSaveComplete(response,status){
-			
-			if(status=="success")
-				{
-				//var resultSet=JSON.parse(response);
-				
-				//if(resultSet.status.trim()=="success")
-					//{
-					$("#alertSuccess").text("Updated successfully.");
-					 $("#alertSuccess").show();
-					 	//window.location.href="/PatientAPI/home.jsp";
-					//}
-				}else if(status=="error")
-					{
-					$("#alertError").text("Error while saving");
-					 $("#alertError").show();
-					
-					}else{
-						
-						$("#alertError").text("Unknown error while saving");
-						 $("#alertError").show();
-					}
-		}
+function  onItemSaveComplete1(response,status)
+{  
+	/*if (status == "success")
+	{ 
+		var resultSet = JSON.parse(response); 
+    
+
+       //if (resultSet.status.trim() == "success")
+       //{   
+	     $("#alertSuccess").text("Successfully saved.");
+	     $("#alertSuccess").show(); 
+
+         $("#divItemsGrid").html(resultSet.data);
+      } else if (resultSet.status.trim() == "error")
+      {    
+	     $("#alertError").text(resultSet.data);
+	     $("#alertError").show(); 
+      } 
+
+      } else if (status == "error")
+      {  
+	     $("#alertError").text("Error while saving.");
+	     $("#alertError").show();
+      } else 
+      {  
+	     $("#alertError").text("Unknown error while saving..");
+	     $("#alertError").show();
+      } 
+
+      $("#hidpatientIDSave").val("");
+      $("#formPatient")[0].reset();*/
+	
+	
+	if(status=="success")
+	{
+		console.log(response)
+		console.log("hi") 
+	var resultSet=JSON.parse(response);
+	
+	
+	console.log(resultSet)
+	
+	//if(resultSet.status.trim()=="success")
+		//{
+		$("#alertSuccess").text("Updated successfully.");
+		 $("#alertSuccess").show();
+		$("#divItemsGrid").html(resultSet.data);
+		 	//window.location.href="/PatientAPI/home.jsp";
+		//}
+	}else if(status=="error")
+		{
+		$("#alertError").text("Error while saving");
+		 $("#alertError").show();
 		
+		}else{
+			
+			$("#alertError").text("Unknown error while saving");
+			 $("#alertError").show();
+		}
+} 
+	
+
 		});
 //Delete Operation
-
 $(document).on("click", ".btnRemove", function(event)
 		{  
 	      $.ajax (
 	    	{   
 	    	  url : "patientAPI",
 	    	  type : "DELETE", 
-	    	  data : "patientID=" + $(this).data("patientID"),
+	    	  data : "patientID=" + $(this).data("patientid"),
 	    	  dataType : "text", 
 	    	  complete : function(response, status) 
 	    	   {   
 	    		  onItemDeleteComplete(response.responseText, status); 
 	    	   } 
 	    }); 
- }); 
+
 function onItemDeleteComplete(response, status)
  {
 	 if (status == "success") 
@@ -228,4 +268,4 @@ function onItemDeleteComplete(response, status)
              $("#alertError").show(); 
          } 
   } 
-
+		});

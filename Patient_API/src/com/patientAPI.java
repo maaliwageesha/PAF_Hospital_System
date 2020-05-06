@@ -26,7 +26,7 @@ public class patientAPI extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public patientAPI() {
+public patientAPI() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,7 +34,7 @@ public class patientAPI extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
 	}
@@ -42,7 +42,7 @@ public class patientAPI extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String output = patientobj.CreatePatient(request.getParameter("Nic"),
 				             request.getParameter("firstName"),
@@ -57,7 +57,6 @@ public class patientAPI extends HttpServlet {
 		response.getWriter().write(output); 
 	}
 // Convert request parameters to a Map
-	
 	private static Map getParasMap(HttpServletRequest request)
 	{  
 		Map<String, String> map = new HashMap<String, String>(); 
@@ -84,7 +83,7 @@ public class patientAPI extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
 	 */
-	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
 		
@@ -97,30 +96,28 @@ public class patientAPI extends HttpServlet {
 		System.out.println( paras.get("password").toString());
 		System.out.println( paras.get("contact").toString());
 		 
-		 String output = patient.UpdatePatient(Integer.parseInt(paras.get("hidpatientIDSave").toString()),
+		String output = patient.UpdatePatient(paras.get("hidpatientIDSave").toString(),
 				           paras.get("Nic").toString(),
 				           paras.get("firstName").toString(),  
 				           paras.get("lastName").toString(),  
-				           paras.get("email").toString(),
+				           paras.get("email").toString().replace("%40", "@"),
 				           paras.get("gridRadios").toString(),
-				           paras.get("address").toString(),
+				           paras.get("address").toString().replace("+", " "),
 				           paras.get("password").toString(),
 				           paras.get("city").toString(),
 				           paras.get("contact").toString()
 				 ); 
-		 
 		
-				 
-		 
-		  response.getWriter().write(output);
+		 response.getWriter().write(output);
 	}
 
 	/**
 	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
 	 */
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		 Map paras = getParasMap(request);
+		 System.out.println("del value"+paras.get("patientID").toString());
 		 String output = patient.DeletePatient(paras.get("patientID").toString());
 		 response.getWriter().write(output); 
 	}

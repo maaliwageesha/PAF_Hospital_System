@@ -12,38 +12,50 @@ import java.sql.*;
  *
  */
 public class PatientRepository{
-	Connection con=null;
-	public PatientRepository()
-	{
-		String url="jdbc:mysql://localhost:3306/pafdb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-		String username="root";
-		String password="";
-		
+	/*
+	 * Connection con=null; public PatientRepository() { String url=
+	 * "jdbc:mysql://localhost:3306/pafdb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+	 * String username="root"; String password="";
+	 * 
+	 * try {
+	 * 
+	 * Class.forName("com.mysql.jdbc.Driver");
+	 * con=DriverManager.getConnection(url,username,password);
+	 * System.out.println("successfully connected to DB"); } catch (SQLException e)
+	 * { // TODO Auto-generated catch block
+	 * System.out.println("Unanel to make connection"); e.printStackTrace(); } catch
+	 * (ClassNotFoundException e) { // TODO Auto-generated catch block
+	 * System.out.println("Unable to make connection"); e.printStackTrace(); }
+	 * 
+	 * }
+	 */
+	
+	
+	private static Connection connect() {
+		Connection con = null;
 		try {
-			
 			Class.forName("com.mysql.jdbc.Driver");
-			con=DriverManager.getConnection(url,username,password);
-			System.out.println("successfully connected to DB");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Unanel to make connection");
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Unable to make connection");
+
+			// Provide the correct details: DBServer/DBName, username, password
+
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/pafdb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+					"root", "");
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		return con;
 	}
 	
-	public String getAllPatients()
+public String getAllPatients()
 	{ String output="";
-	output = "<table border=\"1\"><tr><th>Patient ID</th><th>NIC</th><th>First Name</th><th>Last Name</th>"
-			+ "<th>Email</th><th>Gender</th><th>Address</th><th>Password</th><th>City</th><th>Contact</th><th>update</th><th>remove></th></tr>";
+	  output = "<table border='1'><tr><th>Patient ID</th><th>NIC</th><th>First Name</th><th>Last Name</th>"
+			   + "<th>Email</th><th>Gender</th><th>Address</th><th>Password</th><th>City</th><th>Contact</th><th>update</th><th>remove></th></tr>";
 		
-		String sql="select * from patient";
+	  String sql="select * from patient";
 		
-		try {
+	  try {
+		  Connection con = connect();
 			java.sql.Statement st =con.createStatement();
 			ResultSet rs=st.executeQuery(sql);
 			
@@ -60,8 +72,8 @@ public class PatientRepository{
 				String city=rs.getString("city");
 				String contact=rs.getString("contact");
 				
+				//Add into the HTML table
 				output += "<tr><td><input id='hidItemIDUpdate'name='hidItemIDUpdate' type='hidden'value='" + patientID + "'>" + patientID + "</td>"; 
-				//output += "<tr><td>" + patientID + "</td>";
 				output += "<td>" + NIC + "</td>";
 				output += "<td>" + firstName + "</td>";
 				output += "<td>" + lastName + "</td>";
@@ -72,10 +84,14 @@ public class PatientRepository{
 				output += "<td>" + city + "</td>";
 				output += "<td>" + contact + "</td>";
 				
-				output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td><td><input name='btnRemove' type='button' value='Remove'class='btnRemove btn btn-danger' data-itemid='"+ patientID + "'>" + "</td></tr>"; 
+				//Buttons
+				output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td>"
+						+ "<td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger' data-patientid='" + patientID + "'>"
+						+ "</td></tr>";   
 
 			}
 			con.close();
+			//Complete the patient HTML table
 			output += "</table>";
 			return output;
 			
@@ -89,9 +105,7 @@ public class PatientRepository{
 		return output;
 	}
 	
-	
-	
-	public String getPatient(String patID) {
+public String getPatient(String patID) {
 		String output="";
 		output = "<table border=\"1\"><tr><th>Patient ID</th><th>NIC</th><th>First Name</th><th>Last Name</th>"
 				+ "<th>Email</th><th>Gender</th><th>Address</th><th>Password</th><th>City</th><th>Contact</th></tr>";
@@ -99,10 +113,8 @@ public class PatientRepository{
 		int val=Integer.parseInt(patID);
 		String sql = "Select * from patient where `patientID`="+val;
 		
-		
-		
-		
 		try {
+			 Connection con = connect();
 			PreparedStatement preparedStmt = con.prepareStatement(sql);
 			System.out.println(preparedStmt);
 
@@ -145,11 +157,7 @@ public class PatientRepository{
 		return output;
 	}
 	
-	
-
-	
-	
-	public String createPatientAsForm(String NIC, 
+public String createPatientAsForm(    String NIC, 
 			                          String firstName,
 			                          String lastName,
 			                          String email ,
@@ -166,6 +174,7 @@ public class PatientRepository{
 		String sql2=new String("select * from patient where email=?");
 		
 		try {
+			Connection con = connect();
 			PreparedStatement stm = con.prepareStatement(sql2);
 			stm.setString(1,email);
 			
@@ -221,61 +230,32 @@ public class PatientRepository{
 	 * @return
 	 */
     //Update patients
-	public String UpdatePatient(int patientID,
-			                    String NIC,
-			                    String firstName,
-			                    String lastName,
-			                    String email , 
-			                    String gender , 
-			                    String address,
-			                    String password,
-			                    String city,
-			                    String contact)
-	{
-		String output = "";
-		int count=0;
-	  try {
-		    if (con == null)  
-			 {   
-			   return "Error while connecting to the database for updating.";  
-			 }
-	     //Create a Prepared statement
-		 String sql = "update patient set NIC = ? , firstName = ? , lastName = ?,email = ? ,"
-		      		  + " gender = ? , address = ?,password = ? , city = ? , contact = ?  where patientID = ?";
-			   
-		 PreparedStatement st = con.prepareStatement(sql);
-
-	    //binding values
-		st.setString(1,NIC);
-    	st.setString(2,firstName);
-	    st.setString(3,lastName);
-	    st.setString(4,email);
-	    st.setString(5,gender);
-		st.setString(6,address);
-		st.setString(7,password);
-		st.setString(8,city);
-		st.setString(9,contact);
-		st.setInt(10,patientID);
-			
-		count=st.executeUpdate();
-	} 
-    catch (SQLException e)
-	{ 
-      e.printStackTrace();
- 	  System.out.println("connection value"+e);
-    }
- 	  String getPatients = getAllPatients();
- 	  output = "{\"status\":\"success\", \"data\": \"" +
- 				 getPatients + "\"}"; 
- 	  if(count>0)
- 	  {
- 	    return output;
- 	  }else
- 	   {
- 		 output = "{\"status\":\"error\", \"data\": \"Error while updating the item.\"}"; 
- 		 return output;
- 	   }
-	}    	 
+	/*
+	 * public String UpdatePatient(int patientID, String NIC, String firstName,
+	 * String lastName, String email , String gender , String address, String
+	 * password, String city, String contact) { String output = ""; int count=0; try
+	 * { Connection con = connect();
+	 * 
+	 * String sql =
+	 * "update patient set NIC = ? , firstName = ? , lastName = ?,email = ? ," +
+	 * " gender = ? , address = ?,password = ? , city = ? , contact = ?  where patientID = ?"
+	 * ;
+	 * 
+	 * PreparedStatement st = con.prepareStatement(sql);
+	 * System.out.println("Visted prepare statement");
+	 * 
+	 * st.setString(1,NIC); st.setString(2,firstName); st.setString(3,lastName);
+	 * st.setString(4,email); st.setString(5,gender); st.setString(6,address);
+	 * st.setString(7,password); st.setString(8,city); st.setString(9,contact);
+	 * st.setInt(10,patientID);
+	 * 
+	 * count=st.executeUpdate(); } catch (SQLException e) { e.printStackTrace();
+	 * System.out.println("connection value"+e); } String getPatients =
+	 * getAllPatients(); output = "{\"status\":\"success\",\"data\":\""+getPatients
+	 * +"\"}"; if(count>0) { return output; }else { output =
+	 * "{\"status\":\"error\", \"data\": \"Error while updating the item.\"}";
+	 * return output; } }
+	 */  	 
       	 
 //Delete patients
 //public String DeletePatient(String patientID)
@@ -296,14 +276,70 @@ public class PatientRepository{
 		//}
 		//return output;
 	 //}
+	
  //}
+	
+public String UpdatePatient(String patientID,
+		                    String NIC,
+		                    String firstName,
+			                String lastName,
+			                String email ,
+			                String gender ,
+			                String address,
+			                String password,
+			                String city,
+			                String contact) {
+
+		String output = "";
+
+		try {
+			Connection con = connect();
+			if (con == null) {
+				return "Error while connecting to the database for updating.";
+			}
+			// create a prepared statement
+			String query = "update patient set NIC = ? , firstName = ? , lastName = ?,email = ?, gender = ? , address = ?,password = ? , city = ? , contact = ?  where patientID = ?";
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+
+			// binding values
+
+			preparedStmt.setString(1, NIC);
+			preparedStmt.setString(2, firstName);
+			preparedStmt.setString(3, lastName);
+			preparedStmt.setString(4, email);
+			preparedStmt.setString(5, gender);
+			preparedStmt.setString(6, address);
+			preparedStmt.setString(7, password);
+			preparedStmt.setString(8, city);
+			preparedStmt.setString(9, contact);
+			preparedStmt.setInt(10, Integer.parseInt(patientID));
+			// execute the statement
+			preparedStmt.execute();
+			con.close();
+			
+			String getPatients = getAllPatients();
+			output = "{\"status\":\"success\", \"data\": \"" +getPatients + "\"}";
+			 
+		}
+		catch (Exception e)
+		{
+			output = "{\"status\":\"error\", \"data\": \"Error while updating the Schedule.\"}";
+			 
+			System.err.println(e.getMessage());
+		}
+			
+		return output;
+			 
+	} 
+	
 public String DeletePatient(String patientID)
  {  
+	System.out.println("visited delete");
 	String output = ""; 
 	 
 	  try 
 	  {   
-		  Connection con = null; 
+		  Connection con = connect();
 	 
 	      if (con == null) 
 	      {  
@@ -311,7 +347,7 @@ public String DeletePatient(String patientID)
 	      } 
 	  
 	      //create a prepared statement   
-	      String sql = "delete from items where patientID=?"; 
+	      String sql = "delete from patient where patientID=?"; 
 	      PreparedStatement st =con.prepareStatement(sql); 
 	      
 	      //binding values    
