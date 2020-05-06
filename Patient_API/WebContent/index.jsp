@@ -1,7 +1,5 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <title></title>
     <meta charset="UTF-8">
@@ -23,10 +21,6 @@
     <link rel="stylesheet" href="./CSS/main/mainlayout/style.css" />
     <link rel="stylesheet" href="./CSS/main/mainlayout/animate.css" />
 
-
-
-  
-
 </head>
 
 <body>
@@ -41,15 +35,9 @@
       <jsp:include page="./layouts/header.jsp" />  
     </header>
 
-    <main class="py-4">
-
-        
-      
- <div class="container">
-        
-        
-            
-<div class="header-info">
+<main class="py-4">
+   <div class="container">
+   <div class="header-info">
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-6 hi-item">

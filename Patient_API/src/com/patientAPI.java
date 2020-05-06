@@ -57,7 +57,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		response.getWriter().write(output); 
 	}
 // Convert request parameters to a Map
-	private static Map getParasMap(HttpServletRequest request)
+private static Map getParasMap(HttpServletRequest request)
 	{  
 		Map<String, String> map = new HashMap<String, String>(); 
 		try  
