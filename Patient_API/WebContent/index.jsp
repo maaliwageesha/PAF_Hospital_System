@@ -199,8 +199,8 @@
                     <img src="./images/main/index/svg-icons/001-medicine.svg" style="width: 50px;" alt="">
                 </div>
                 <div class="service-content">
-                    <h4>Auto-isopathy</h4>
-                    <p>Treatment with remedies made from the particular patients’ own body substances.</p>
+                    <h4>LABORATORIES</h4>
+                    <p>Over the last 15 years HealthCare laboratories has build a reputation for accuracy and dependability.Using the most modern,fast and accurate analysers in the world,HeathCare laboratories conducts internal quality control on all its machines daily.</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 service">
@@ -209,9 +209,8 @@
                         alt="">
                 </div>
                 <div class="service-content">
-                    <h4>Classical Homeopathy</h4>
-                    <p>The individual is considered as a whole and symptoms from the body, mind, and spirit are
-                        considered when choosing a homeopathic remedy.</p>
+                    <h4>PHARMACY</h4>
+                    <p>The pharmacy is the one place where all our patients converge at some point or the other during a visit to HealthCare and that is why we ensure that all pharmacies are well stocked with products that match the most stringent international standards,and manned by efficient,qualified personnel.</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 service">
@@ -220,39 +219,13 @@
                         alt="">
                 </div>
                 <div class="service-content">
-                    <h4>Clinical Homeopathy</h4>
-                    <p>Non-individualised treatment based mainly on guiding symptoms; (e.g. arnica for bruises).</p>
+                    <h4>E-channeling</h4>
+                    <p>Booking an appoinment with your doctor becomes much easier and simpler with the new digital booking available service available for HealthCare system.Online doctor channeling solution is a service that offers convenient booking facilities through hospitals,web.You can easily make appoinment throgh this.</p>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 service">
-                <div class="service-icon">
-                    <img src="./images/main/index/svg-icons/004-care.svg" style="width: 50px;" alt="">
-                </div>
-                <div class="service-content">
-                    <h4>Complex homeopathy</h4>
-                    <p>Uses remedies that are mixtures of ingredients or that prescribes several remedies taken in
-                        combination.</p>
-                </div>
+         
             </div>
-            <div class="col-lg-4 col-md-6 service">
-                <div class="service-icon">
-                    <img src="{{ asset('images/main/index/svg-icons/005-doctor.svg') }}" style="width: 50px;" alt="">
-                </div>
-                <div class="service-content">
-                    <h4>Homotoxicology</h4>
-                    <p>A therapeutic branch which enables deep cleansing of the body tissues, removing old toxins,
-                        disease processes and degenerative debris, leaving the fluids clean, fresh and able to
-                        function as intended.</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 service">
-                <div class="service-icon">
-                    <img src="{{ asset('images/main/index/svg-icons/007-hospital.svg') }}" style="width: 50px;" alt="">
-                </div>
-                <div class="service-content">
-                    <h4>Isopathy</h4>
-                    <p>Use of remedies made from the causative agent, e.g. a specific allergen for an allergy.</p>
-                </div>
+       
             </div>
         </div>
     </div>
