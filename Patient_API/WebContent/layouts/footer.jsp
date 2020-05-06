@@ -7,7 +7,7 @@
                     <div class="fw-about">
                         <a href="" class="site-logo-footer"> <img
                                 src="./images/main/mainlayout/logo_image.png" alt=""></a>
-                        <p>International Health care is a hospital system. The client request is to create a web based
+                        <p>Health care is a hospital management system. The client request is to create a web based
                             application to manage their patient details, make appointments through the online and
                             also to make patients payments through online</p>
                         <div class="fw-social">
@@ -26,12 +26,10 @@
                     <div class="fw-links">
                         <h5 class="fw-title">Our Services</h5>
                         <ul>
-                            <li><a href="">Auto-isopathy</a></li>
-                            <li><a href="">Clinical Homeopathy</a></li>
-                            <li><a href="">Homotoxicology</a></li>
-                            <li><a href="">Classical Homeopathy</a></li>
-                            <li><a href="">Complex homeopathy</a></li>
-                            <li><a href="">Isopathy</a></li>
+                            <li><a href="">E-channeling</a></li>
+                            <li><a href="">Laboratory Services</a></li>
+                            <li><a href="">Pharmacy</a></li>
+                           
                         </ul>
                     </div>
                 </div>

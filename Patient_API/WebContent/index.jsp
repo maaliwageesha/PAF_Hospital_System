@@ -38,7 +38,7 @@
     <!-- Header section -->
     <header class="header-section">
         
-      <jsp:include page="header.jsp" />  
+      <jsp:include page="./layouts/header.jsp" />  
     </header>
 
     <main class="py-4">
@@ -350,7 +350,7 @@
 
     </main>
   
-    <jsp:include page="footer.jsp" /> 
+    <jsp:include page="./layouts/footer.jsp" /> 
 
 
     <!--====== Javascripts & Jquery ======-->

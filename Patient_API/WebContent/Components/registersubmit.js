@@ -45,14 +45,10 @@ function  onItemSaveComplete(response,status){
 	
 	if(status=="success")
 		{
-		//var resultSet=JSON.parse(response);
-		
-		//if(resultSet.status.trim()=="success")
-			//{
 			$("#alertSuccess").text("Saved successfully.");
 			 $("#alertSuccess").show();
 			 	window.location.href="/PatientAPI/home.jsp";
-			//}
+		
 		}else if(status=="error")
 			{
 			$("#alertError").text("Error while saving");
@@ -162,15 +158,16 @@ $(document).on("click", "#btnSave", function(event)
 						onItemSaveComplete1(response.responseText,status);
 					}
 				});
+	      
 function  onItemSaveComplete1(response,status)
 {  
-	/*if (status == "success")
+	if (status == "success")
 	{ 
 		var resultSet = JSON.parse(response); 
     
 
-       //if (resultSet.status.trim() == "success")
-       //{   
+       if (resultSet.status.trim() == "success")
+       {   
 	     $("#alertSuccess").text("Successfully saved.");
 	     $("#alertSuccess").show(); 
 
@@ -192,35 +189,10 @@ function  onItemSaveComplete1(response,status)
       } 
 
       $("#hidpatientIDSave").val("");
-      $("#formPatient")[0].reset();*/
+      $("#formPatient")[0].reset();
 	
 	
-	if(status=="success")
-	{
-		console.log(response)
-		console.log("hi") 
-	var resultSet=JSON.parse(response);
-	
-	
-	console.log(resultSet)
-	
-	//if(resultSet.status.trim()=="success")
-		//{
-		$("#alertSuccess").text("Updated successfully.");
-		 $("#alertSuccess").show();
-		$("#divItemsGrid").html(resultSet.data);
-		 	//window.location.href="/PatientAPI/home.jsp";
-		//}
-	}else if(status=="error")
-		{
-		$("#alertError").text("Error while saving");
-		 $("#alertError").show();
-		
-		}else{
-			
-			$("#alertError").text("Unknown error while saving");
-			 $("#alertError").show();
-		}
+
 } 
 	
 

@@ -23,11 +23,14 @@
     <link rel="stylesheet" href="./CSS/main/mainlayout/owl.carousel.css" />
     <link rel="stylesheet" href="./CSS/main/mainlayout/style.css" />
     <link rel="stylesheet" href="./CSS/main/mainlayout/animate.css" />
-
  <link href="./CSS/registerCSS/style.css" rel="stylesheet" type="text/css" >
 
-<script src="./js/jquery-3.2.1.min.js"></script>
 
+
+
+				<!-- Java script files for jquery and js controllers -->
+				<script src="./Components/jquery-3.2.1.min.js"></script>
+				<script src="./Components/registersubmit.js"></script>
    
   
 </head>
@@ -41,7 +44,7 @@
     <!-- Header section -->
  <header class="header-section">
         
-      <jsp:include page="header.jsp" />  
+      <jsp:include page="./layouts/header.jsp" />  
     </header>
 
     <main class="py-4">
@@ -214,7 +217,7 @@
 
     </main>
   
-    <jsp:include page="footer.jsp" /> 
+    <jsp:include page="./layouts/footer.jsp" /> 
 
 
     <!--====== Javascripts & Jquery ======-->
@@ -224,7 +227,7 @@
     <script defer src="./js/circle-progress.min.js"></script>
     <script defer src="./js/main.js"></script>
     
-<script src="./js/registersubmit.js"></script>
+
 
 <script>
 

@@ -19,7 +19,7 @@ import model.PatientRepository;
 public class patientAPI extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	PatientService patientobj=new PatientService();
+	
 	
 	PatientRepository patient=new PatientRepository();
        
@@ -44,7 +44,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 	 */
 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String output = patientobj.CreatePatient(request.getParameter("Nic"),
+		String output = patient.createPatientAsForm(request.getParameter("Nic"),
 				             request.getParameter("firstName"),
 				             request.getParameter("lastName"),
 				             request.getParameter("email"),

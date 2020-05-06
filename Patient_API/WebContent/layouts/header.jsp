@@ -15,9 +15,7 @@
     <ul class="main-menu">
         <li><a href="/">Home</a></li>
         <li><a href="/about">About</a></li>
-        <li><a href="/search-product">Shop</a></li>
         <li><a href="/ServiceTest">Services</a></li>
-        <li><a href="/gallery">Gallery</a></li>
         <li><a href="/contact2">Contact</a></li>
         <!-- <li><a href="elements.html"><i class="flaticon-020-decay"></i></a></li> -->
        
@@ -31,7 +29,8 @@
        
         </form>
   
-        <li class="login-style"><a href="/PatientAPI/login.jsp">Sign In</a></li>
+        <li class="login-style"><a href="/PatientAPI/register.jsp">Register</a></li>
+        <li class="login-style"><a href="/PatientAPI/home.jsp">Update</a></li>
      
     </ul>
 </div>
